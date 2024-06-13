@@ -5,15 +5,17 @@ export const createHash = (password) => {
   bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 };
 export const isValidPassword = (user, password) => {
-  bcrypt.compareSync(password, user.password);
+  return bcrypt.compareSync(password, user.password);
 };
 export const verifyRequiredBody = (requiredFields) => {
-  return (res, req, next) => {
+  return (req, res, next) => {
     const allOk = requiredFields.every((field) => {
-      req.body.hasOwnProperty(field) &&
+      return (
+        req.body.hasOwnProperty(field) &&
         req.body[field] !== "" &&
         req.body[field] !== null &&
-        req.body[field] !== undefined;
+        req.body[field] !== undefined
+      );
     });
     if (!allOk)
       return res

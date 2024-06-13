@@ -14,7 +14,6 @@ const initAuthStrategies = () => {
         try {
           let myUser = await UserMDBManager.findUser(username);
           const validation = isValidPassword(myUser, password);
-
           if (myUser && validation) {
             return done(null, myUser);
           } else {

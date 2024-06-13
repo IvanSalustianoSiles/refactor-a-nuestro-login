@@ -135,6 +135,9 @@ router.get("/chat", (req, res) => {
 router.get("/login", (req, res) => {
   !req.session.user ? res.render("login", {}) : res.redirect("/profile");
 });
+router.get("/pplogin", (req, res) => {
+  !req.session.user ? res.render("pplogin", {}) : res.redirect("/profile");
+});
 router.get("/profile", (req, res) => {
   UserMDBManager.isRegistered("profile", { user: req.session.user }, req, res);
 });

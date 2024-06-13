@@ -76,7 +76,7 @@ router.post("/register", verifyRequiredBody([ "name", "lastName", "password", "e
     }
   }
 );
-router.post("/pplogin", verifyRequiredBody(["email", "password"]), passport.authenticate("login", { failureRedirect: `/login?error=${encodeURI("Usuario y/o clave no válidos.")}` }), async (req, res) => {  
+router.post("/pplogin", verifyRequiredBody(["email", "password"]), passport.authenticate("login", { failureRedirect: `/pplogin?error=${encodeURI("Usuario y/o clave no válidos.")}` }), async (req, res) => {  
   try {
       req.session.user = req.user;
       req.session.save((error) => {
@@ -95,7 +95,7 @@ router.post("/pplogin", verifyRequiredBody(["email", "password"]), passport.auth
     }
   }
 );
-router.post("/ppregister", verifyRequiredBody([ "name", "lastName", "password", "email", "phoneNumber", "description", "age"]), passport.authenticate("register", { failureRedirect: `/register?error=${encodeURI("Email y/o contraseña no válidos.")}`}), async (req, res) => {
+router.post("/ppregister", verifyRequiredBody([ "name", "lastName", "password", "email", "phoneNumber", "description", "age"]), passport.authenticate("register", { failureRedirect: `/ppregister?error=${encodeURI("Email y/o contraseña no válidos.")}`}), async (req, res) => {
     try {
       req.session.user = req.user;
       let dbUser2 = await UserMDBManager.addUser(req.user);

@@ -146,5 +146,10 @@ router.get("/register", (req, res) => {
     ? res.render("register", { user: req.session.user })
     : res.send("Ya has ingresado.");
 });
+router.get("/ppregister", (req, res) => {
+  !req.session.user
+    ? res.render("ppregister", { user: req.session.user })
+    : res.send("Ya has ingresado.");
+});
 
 export default router;

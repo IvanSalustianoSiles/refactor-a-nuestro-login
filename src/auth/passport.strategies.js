@@ -1,7 +1,7 @@
 import passport from "passport";
 import local from "passport-local";
 import { UserMDBManager } from "../dao/index.js";
-import { isValidPassword } from "../utils.js";
+import { isValidPassword, createHash } from "../utils.js";
 
 const localStrategy = local.Strategy;
 
@@ -36,8 +36,8 @@ const initAuthStrategies = () => {
             return done(null, false);
           }
           const newUser = { ...req.body, password: createHash(password) };
-          let result = await userService.create(newUser);
-          return done(null, result);
+          let result = await UserMDBManager.addUser(newUser);
+          return done(null, newUser);
         } catch (error) {
           return done("Error:" + error);
         }
